@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.sda.micgeb.spring_rest_app.model.Car;
 import pl.sda.micgeb.spring_rest_app.service.CarService;
@@ -20,6 +21,13 @@ public class CarController {
     @GetMapping
     public ResponseEntity<List<Car>> getAllCars() {
         return ResponseEntity.ok(carService.getAllCars());
+    }
+
+    @GetMapping("/number")
+    public ResponseEntity<Car> getByRegistrationNumber(@RequestParam String number) {
+        return carService.getByRegistrationNumber(number)
+                .map(optCar -> ResponseEntity.ok(optCar))
+                .orElse(null);
     }
 
 }

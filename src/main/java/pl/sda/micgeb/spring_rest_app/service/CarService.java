@@ -7,6 +7,7 @@ import pl.sda.micgeb.spring_rest_app.repository.CarRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarService {
@@ -20,5 +21,9 @@ public class CarService {
 
     public List<Car> getAllCars() {
         return carRepository.getAllCars();
+    }
+
+    public Optional<Car> getByRegistrationNumber(String registrationNumber) {
+        return carRepository.getCarByRegistrationNumber(registrationNumber);
     }
 }

@@ -5,10 +5,7 @@ import pl.sda.micgeb.spring_rest_app.model.Car;
 import pl.sda.micgeb.spring_rest_app.model.FuelType;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class InMemoryCarRepository implements CarRepository {
@@ -57,5 +54,10 @@ public class InMemoryCarRepository implements CarRepository {
     @Override
     public List<Car> getAllCars() {
         return new ArrayList<>(carMap.values());
+    }
+
+    @Override
+    public Optional<Car> getCarByRegistrationNumber(String registrationNumber) {
+        return Optional.ofNullable(carMap.get(registrationNumber));
     }
 }
