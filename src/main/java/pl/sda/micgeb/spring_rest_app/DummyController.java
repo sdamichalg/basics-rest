@@ -2,15 +2,25 @@ package pl.sda.micgeb.spring_rest_app;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.sda.micgeb.spring_rest_app.configuration.WorkshopConfiguration;
+import pl.sda.micgeb.spring_rest_app.configuration.WorkshopInfo;
 
 import java.time.LocalDate;
 
 @RestController // @Controller + @ResponseBody
 @RequestMapping("/dummy")
 public class DummyController {
+
+
+    private final WorkshopInfo workshopInfo;
+    private final WorkshopConfiguration workshopConfiguration;
+
+    public DummyController(WorkshopInfo workshopInfo, WorkshopConfiguration workshopConfiguration) {
+        this.workshopInfo = workshopInfo;
+        this.workshopConfiguration = workshopConfiguration;
+    }
 
     @GetMapping
     public LocalDate getDate() {
@@ -73,5 +83,17 @@ public class DummyController {
     @GetMapping("/path")
     public ResponseEntity<String> withRequestParam(@RequestParam String parametr1, @RequestParam String param2) {
         return ResponseEntity.ok("Otrzymany parametr od klienta: " + parametr1 + param2);
+    }
+
+    @GetMapping("/workshop")
+    public ResponseEntity<Void> showConfigsInConsole() {
+        workshopInfo.showDataFromProperties();
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/config")
+    public ResponseEntity<Void> showConfigsInConsole_v2() {
+        workshopConfiguration.showDataFromProperties();
+        return ResponseEntity.ok().build();
     }
 }
