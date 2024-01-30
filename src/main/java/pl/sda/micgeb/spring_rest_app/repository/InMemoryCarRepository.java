@@ -6,6 +6,7 @@ import pl.sda.micgeb.spring_rest_app.model.FuelType;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryCarRepository implements CarRepository {
@@ -59,5 +60,33 @@ public class InMemoryCarRepository implements CarRepository {
     @Override
     public Optional<Car> getCarByRegistrationNumber(String registrationNumber) {
         return Optional.ofNullable(carMap.get(registrationNumber));
+    }
+
+    @Override
+    public List<Car> addCar(String registrationNumber, Car newCar) {
+        carMap.put(registrationNumber, newCar);
+        return new ArrayList<>(carMap.values());
+    }
+
+    @Override
+    public List<Car> updateCarValue(String registrationNumber, BigDecimal newValue) {
+        Optional<Car> car = Optional.ofNullable(carMap.get(registrationNumber));
+        car.ifPresent(value -> value.setCarValue(newValue));
+        return new ArrayList<>(carMap.values());
+    }
+
+    @Override
+    public List<Car> getCarsByFuelType(FuelType fuelType) {
+        return carMap.values().stream()
+                .filter(x -> x.getFuelType().equals(fuelType))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Car> deleteByParams(String model, String brand) {
+        carMap.entrySet()
+                .removeIf(entry -> entry.getValue().getModel().equals(model) && entry.getValue().getBrand().equals(brand));
+
+        return new ArrayList<>(carMap.values());
     }
 }
