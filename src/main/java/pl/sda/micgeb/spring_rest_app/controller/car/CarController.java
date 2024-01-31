@@ -1,12 +1,12 @@
-package pl.sda.micgeb.spring_rest_app.controller;
+package pl.sda.micgeb.spring_rest_app.controller.car;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.sda.micgeb.spring_rest_app.controller.request.DeleteCarParamsReq;
-import pl.sda.micgeb.spring_rest_app.controller.response.DeleteCarParamsResp;
+import pl.sda.micgeb.spring_rest_app.controller.car.request.DeleteCarParamsReq;
+import pl.sda.micgeb.spring_rest_app.controller.car.response.DeleteCarParamsResp;
 import pl.sda.micgeb.spring_rest_app.model.Car;
-import pl.sda.micgeb.spring_rest_app.service.CarService;
+import pl.sda.micgeb.spring_rest_app.service.car.CarService;
 
 import java.math.BigDecimal;
 import java.util.List;

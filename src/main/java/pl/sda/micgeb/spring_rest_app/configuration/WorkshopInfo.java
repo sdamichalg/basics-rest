@@ -3,7 +3,6 @@ package pl.sda.micgeb.spring_rest_app.configuration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
 public class WorkshopInfo {
 
     @Value("${workshop.info.author}")

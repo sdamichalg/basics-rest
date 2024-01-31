@@ -1,4 +1,4 @@
-package pl.sda.micgeb.spring_rest_app.controller.request;
+package pl.sda.micgeb.spring_rest_app.controller.car.request;
 
 import lombok.Data;
 

@@ -1,17 +1,15 @@
-package pl.sda.micgeb.spring_rest_app.service;
+package pl.sda.micgeb.spring_rest_app.service.car;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.sda.micgeb.spring_rest_app.model.Car;
 import pl.sda.micgeb.spring_rest_app.model.FuelType;
 import pl.sda.micgeb.spring_rest_app.repository.CarRepository;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//@Service
+@Service
 public class CarService {
 
     private final CarRepository carRepository;
@@ -40,6 +38,7 @@ public class CarService {
     public List<Car> getByFuelType(String fuelType) {
         return carRepository.getCarsByFuelType(FuelType.valueOf(fuelType));
     }
+
     public List<Car> deleteByParams(String model, String brand) {
         return carRepository.deleteByParams(model, brand);
     }
