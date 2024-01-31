@@ -1,6 +1,7 @@
 package pl.sda.micgeb.spring_rest_app.controller.car;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.micgeb.spring_rest_app.controller.car.request.DeleteCarParamsReq;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/cars")
+@Slf4j
 public class CarController {
 
     private final CarService carService;
@@ -54,12 +56,12 @@ public class CarController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<DeleteCarParamsResp> deleteByParams(@RequestBody DeleteCarParamsReq params) {
+        log.info("Otrzymalismy request dotyczacu usuniecia samochodu z wypozyczalni" + params.getBrand() + params.getModel());
         DeleteCarParamsResp response = new DeleteCarParamsResp();
         List<Car> cars = carService.deleteByParams(params.getModel(), params.getBrand());
 
         response.setAmount(cars.size());
         response.setCars(cars);
-
         return ResponseEntity.ok(response);
     }
 }
