@@ -11,13 +11,10 @@ import pl.sda.micgeb.spring_rest_app.service.commercial.CommercialService;
 
 @RestController
 @RequestMapping("/commercial")
+@RequiredArgsConstructor
 public class CommercialController {
 
     private final CommercialService commercialService;
-
-    public CommercialController(@Qualifier("businessCustomerCommercialService") CommercialService commercialService) {
-        this.commercialService = commercialService;
-    }
 
     @PostMapping
     public ResponseEntity<Void> sendCommercial(@RequestBody String content) {
