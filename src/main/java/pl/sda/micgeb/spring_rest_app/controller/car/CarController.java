@@ -1,5 +1,6 @@
 package pl.sda.micgeb.spring_rest_app.controller.car;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -35,7 +36,7 @@ public class CarController {
     }
 
     @PostMapping("/{number}")
-    public ResponseEntity<List<Car>> addCar(@PathVariable String number, @RequestBody Car car) {
+    public ResponseEntity<List<Car>> addCar(@PathVariable String number, @RequestBody @Valid Car car) {
         return ResponseEntity.ok(carService.addCar(number, car));
     }
 
