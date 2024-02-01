@@ -2,6 +2,7 @@ package pl.sda.micgeb.spring_rest_app.controller.car;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.micgeb.spring_rest_app.controller.car.request.DeleteCarParamsReq;
@@ -34,7 +35,9 @@ public class CarController {
 
     @PostMapping("/{number}")
     public ResponseEntity<List<Car>> addCar(@PathVariable String number, @RequestBody Car car) {
-        return ResponseEntity.ok(carService.addCar(number, car));
+        List<Car> cars = carService.addCar(number, car);
+        return cars.isEmpty() ? ResponseEntity.status(HttpStatus.ALREADY_REPORTED).build() :
+                ResponseEntity.ok(cars);
     }
 
     @PatchMapping("/value/{number}")

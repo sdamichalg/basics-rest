@@ -64,6 +64,9 @@ public class InMemoryCarRepository implements CarRepository {
 
     @Override
     public List<Car> addCar(String registrationNumber, Car newCar) {
+        if (carMap.containsKey(registrationNumber)) {
+            return new ArrayList<>();
+        }
         carMap.put(registrationNumber, newCar);
         return new ArrayList<>(carMap.values());
     }
