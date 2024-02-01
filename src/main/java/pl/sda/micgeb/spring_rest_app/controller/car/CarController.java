@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sda.micgeb.spring_rest_app.controller.car.request.DeleteCarParamsReq;
 import pl.sda.micgeb.spring_rest_app.controller.car.response.DeleteCarParamsResp;
+import pl.sda.micgeb.spring_rest_app.exceptions.NoSuchCarException;
 import pl.sda.micgeb.spring_rest_app.model.Car;
 import pl.sda.micgeb.spring_rest_app.service.car.CarService;
 
@@ -30,7 +31,7 @@ public class CarController {
     public ResponseEntity<Car> getByRegistrationNumber(@RequestParam String number) {
         return carService.getByRegistrationNumber(number)
                 .map(optCar -> ResponseEntity.ok(optCar))
-                .orElse(null);
+                .orElseThrow(() -> new NoSuchCarException(number));
     }
 
     @PostMapping("/{number}")
