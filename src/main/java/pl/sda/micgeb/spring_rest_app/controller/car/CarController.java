@@ -35,9 +35,7 @@ public class CarController {
 
     @PostMapping("/{number}")
     public ResponseEntity<List<Car>> addCar(@PathVariable String number, @RequestBody Car car) {
-        List<Car> cars = carService.addCar(number, car);
-        return cars.isEmpty() ? ResponseEntity.status(HttpStatus.ALREADY_REPORTED).build() :
-                ResponseEntity.ok(cars);
+        return ResponseEntity.ok(carService.addCar(number, car));
     }
 
     @PatchMapping("/value/{number}")

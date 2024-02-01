@@ -1,6 +1,7 @@
 package pl.sda.micgeb.spring_rest_app.repository;
 
 import org.springframework.stereotype.Repository;
+import pl.sda.micgeb.spring_rest_app.exceptions.ExistingCarException;
 import pl.sda.micgeb.spring_rest_app.model.Car;
 import pl.sda.micgeb.spring_rest_app.model.FuelType;
 
@@ -65,7 +66,7 @@ public class InMemoryCarRepository implements CarRepository {
     @Override
     public List<Car> addCar(String registrationNumber, Car newCar) {
         if (carMap.containsKey(registrationNumber)) {
-            return new ArrayList<>();
+            throw new ExistingCarException(registrationNumber);
         }
         carMap.put(registrationNumber, newCar);
         return new ArrayList<>(carMap.values());
